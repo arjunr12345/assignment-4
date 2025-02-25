@@ -1,0 +1,25 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.box {
+    height: 0px;
+    width: 0px;
+    margin-right: 50px;
+}
+
+.main {
+    width: 420px;
+    height: 500px;
+    display: grid;
+    justify-items: center;
+    align-items: top;
+    margin-left: 50px;
+    margin-top: 50px;
+    background-color: rgb(193, 198, 199);
+}
+
+.button {
+    align-items: bottom;
+}
