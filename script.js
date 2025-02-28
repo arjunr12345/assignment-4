@@ -20,20 +20,29 @@ document.getElementById("quad-form").addEventListener('submit', (event) => {
 document.getElementById("ambiguous").addEventListener('submit', (event) => {
     event.preventDefault();
     const a = document.getElementById("Aa").value;
-    const b = document.getElementById("sa").value;
-    const c = document.getElementById("sb").value;
-    const am = c*(Math.sin(a))
-    if (a<90) {
-    if (b<am) {
-        document.getElementById("result").value = "No triangle";
-    } else if (b=am) {
-        document.getElementById("result").value = "Right triangle";
-    } else if (b>am) {
-        document.getElementById("result").value = "one triangle";
-    } else if (am<b<c) {
-        document.getElementById("result").value = "Two triangles (ambiguous case)";
+    const b = document.getElementById("b").value;
+    const c = document.getElementById("c").value;
+    const am = c * Math.sin(a * Math.PI / 180);
+     if (a <= 90) {
+        if (b < am) {
+            document.getElementById("result").value = "No triangle";
+        } else if (b == am) {
+            document.getElementById("result").value = "Right triangle";
+        } else if (b > am) {
+            document.getElementById("result").value = "one triangle";
+        } else if (am < b && b < c) {
+            document.getElementById("result").value = "Two triangles (ambiguous case)";
+        }
+    } else {
+        if (b < c || b == c) {
+            document.getElementById("result").value = "No Triangle";
+        }
+        else if (b > c) {
+            document.getElementById("result").value = "one triangle";
+        }
     }
-}
+    document.getElementById("result").value = "error";
+
 }
 
 )
