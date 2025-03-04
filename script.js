@@ -23,7 +23,7 @@ document.getElementById("ambiguous").addEventListener('submit', (event) => {
     const b = document.getElementById("b").value;
     const c = document.getElementById("c").value;
     const am = c * Math.sin(a * Math.PI / 180);
-     if (a <= 90) {
+    if (a <= 90) {
         if (b < am) {
             document.getElementById("result-2").value = "No triangle";
         } else if (b == am) {
@@ -49,6 +49,14 @@ document.getElementById("ambiguous").addEventListener('submit', (event) => {
 document.getElementById("new-mod").addEventListener('submit', (event) => {
     event.preventDefault();
     const a = document.getElementById("r").value;
-    
+    const newtons = (g) => {
+        let approx = g - (6 * Math.pow(g, 4) - 13 * Math.pow(g, 3) - 18 * Math.pow(g, 2) + 7 * g + 6) / (24 * Math.pow(g, 3) - 39 * Math.pow(g, 2) - 36 * g + 7);
+        let r = approx;
+        while (r - g != 0) {
+            g = r;
+            r = g - (6 * Math.pow(g, 4) - 13 * Math.pow(g, 3) - 18 * Math.pow(g, 2) + 7 * g + 6) / (24 * Math.pow(g, 3) - 39 * Math.pow(g, 2) - 36 * g + 7);
+            document.getElementById("result3").value = [approx, r];
+        }
+    }
 }
 )
