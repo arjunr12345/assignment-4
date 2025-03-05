@@ -22,7 +22,7 @@ body {
     align-items: center;
 }
 
-.box1, .box2, .box3, .box4 {
+.box1, .box2, .box3, .box4, .box5{
     background-color: white;
     padding: 20px;
     border-radius: 8px;

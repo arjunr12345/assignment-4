@@ -121,3 +121,13 @@ document.getElementById("poly").addEventListener("submit", (event) => {
     document.getElementById("result4").value = polynomialString;
     document.getElementById("result5").value = polynomialValue.toFixed(4); // Rounded to 4 decimal places
 });
+document.getElementById("heron").addEventListener("submit", (event) => {
+    event.preventDefault();
+    
+    const a = document.getElementById("av").value;
+    const b = document.getElementById("bv").value;
+    const c = document.getElementById("cv").value;
+    const area = (1 / 4) * Math.sqrt(((4 * Math.pow(a, 2)) * Math.pow(b, 2)) - Math.pow((Math.pow(a, 2) + Math.pow(b, 2) - Math.pow(c, 2)), 2));
+
+    document.getElementById("result6").value = area;
+});
