@@ -50,8 +50,8 @@ document.getElementById("new-mod").addEventListener("submit", (event) => {
     event.preventDefault();
 
     let x = parseFloat(document.getElementById("r").value);
-    let tolerance = 1e-6; 
-    let maxIterations = 100; 
+    let tolerance = 1e-6;
+    let maxIterations = 100;
     let iteration = 0;
 
     function f(x) {
@@ -62,7 +62,7 @@ document.getElementById("new-mod").addEventListener("submit", (event) => {
         return 24 * Math.pow(x, 3) - 39 * Math.pow(x, 2) - 36 * x + 7;
     }
 
-    console.log(`Starting Newton’s Method at x = ${x}`); 
+    console.log(`Starting Newton’s Method at x = ${x}`);
 
     while (iteration < maxIterations) {
         let fx = f(x);
@@ -75,7 +75,7 @@ document.getElementById("new-mod").addEventListener("submit", (event) => {
 
         let nextX = x - fx / fpx;
 
-        console.log(`Iteration ${iteration}: x = ${nextX}`); 
+        console.log(`Iteration ${iteration}: x = ${nextX}`);
 
         if (Math.abs(nextX - x) < tolerance) {
             document.getElementById("result3").value = `Root: ${nextX.toFixed(6)}`;
@@ -90,6 +90,34 @@ document.getElementById("new-mod").addEventListener("submit", (event) => {
 });
 document.getElementById("poly").addEventListener("submit", (event) => {
     event.preventDefault();
-    
+
 }
 )
+document.getElementById("poly").addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const coefficients = document.getElementById("ce").value.split(" ").map(Number);
+    const exponents = document.getElementById("ex").value.split(" ").map(Number);
+    const x = parseFloat(document.getElementById("x").value);
+
+    if (coefficients.length !== exponents.length) {
+        document.getElementById("result4").value = "Error: Mismatched coefficients and exponents";
+        return;
+    }
+
+    let polynomialString = "";
+    let polynomialValue = 0;
+
+    for (let i = 0; i < coefficients.length; i++) {
+        let coef = coefficients[i];
+        let exp = exponents[i];
+
+        if (i > 0 && coef >= 0) polynomialString += " + ";
+        polynomialString += `${coef}x^${exp}`;
+
+        polynomialValue += coef * Math.pow(x, exp);
+    }
+
+    document.getElementById("result4").value = polynomialString;
+    document.getElementById("result5").value = polynomialValue.toFixed(4); // Rounded to 4 decimal places
+});
