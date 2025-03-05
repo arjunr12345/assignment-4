@@ -16,7 +16,7 @@ document.getElementById("quad-form").addEventListener('submit', (event) => {
         document.getElementById("result").value = `x=${rootOne}`;
     }
 }
-)
+);
 document.getElementById("ambiguous").addEventListener('submit', (event) => {
     event.preventDefault();
     const a = document.getElementById("Aa").value;
@@ -45,18 +45,51 @@ document.getElementById("ambiguous").addEventListener('submit', (event) => {
 
 }
 
-)
-document.getElementById("new-mod").addEventListener('submit', (event) => {
+);
+document.getElementById("new-mod").addEventListener("submit", (event) => {
     event.preventDefault();
-    const a = document.getElementById("r").value;
-    const newtons = (g) => {
-        let approx = g - (6 * Math.pow(g, 4) - 13 * Math.pow(g, 3) - 18 * Math.pow(g, 2) + 7 * g + 6) / (24 * Math.pow(g, 3) - 39 * Math.pow(g, 2) - 36 * g + 7);
-        let r = approx;
-        while (r - g != 0) {
-            g = r;
-            r = g - (6 * Math.pow(g, 4) - 13 * Math.pow(g, 3) - 18 * Math.pow(g, 2) + 7 * g + 6) / (24 * Math.pow(g, 3) - 39 * Math.pow(g, 2) - 36 * g + 7);
-            document.getElementById("result3").value = [approx, r];
-        }
+
+    let x = parseFloat(document.getElementById("r").value);
+    let tolerance = 1e-6; 
+    let maxIterations = 100; 
+    let iteration = 0;
+
+    function f(x) {
+        return 6 * Math.pow(x, 4) - 13 * Math.pow(x, 3) - 18 * Math.pow(x, 2) + 7 * x + 6;
     }
+
+    function fPrime(x) {
+        return 24 * Math.pow(x, 3) - 39 * Math.pow(x, 2) - 36 * x + 7;
+    }
+
+    console.log(`Starting Newton’s Method at x = ${x}`); 
+
+    while (iteration < maxIterations) {
+        let fx = f(x);
+        let fpx = fPrime(x);
+
+        if (Math.abs(fpx) < tolerance) {
+            document.getElementById("result3").value = "Derivative near zero! No valid root.";
+            return;
+        }
+
+        let nextX = x - fx / fpx;
+
+        console.log(`Iteration ${iteration}: x = ${nextX}`); 
+
+        if (Math.abs(nextX - x) < tolerance) {
+            document.getElementById("result3").value = `Root: ${nextX.toFixed(6)}`;
+            return;
+        }
+
+        x = nextX;
+        iteration++;
+    }
+
+    document.getElementById("result3").value = "Did not converge.";
+});
+document.getElementById("poly").addEventListener("submit", (event) => {
+    event.preventDefault();
+    
 }
 )
